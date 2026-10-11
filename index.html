@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>M3U LIVE PLAYER – Reproductor multiformato de listas M3U</title>
 <meta name="description" content="M3U LIVE PLAYER es un reproductor multiformato para tus listas M3U. Agregá listas ilimitadas y mirá todo desde un reproductor moderno. Descargalo en Google Play.">
 <meta name="theme-color" content="#2F5BFF">
@@ -27,8 +27,9 @@
     --body:"Inter","Segoe UI",system-ui,-apple-system,sans-serif;
   }
   *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
   html,body{height:100%}
-  body{margin:0;font-family:var(--body);font-size:17px;line-height:1.65;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;min-height:100vh}
+  body{margin:0;font-family:var(--body);font-size:17px;line-height:1.65;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;min-height:100vh;min-height:100dvh;padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px);overflow-x:hidden}
   a{color:inherit}
   :focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:8px}
   .wrap{width:min(1180px,100% - 48px);margin-inline:auto}
@@ -51,7 +52,7 @@
   .points .ic{width:18px;height:18px;color:var(--blue);stroke-width:2.4}
 
   .play-badge{display:inline-flex;align-items:center;gap:12px;background:#000;color:#fff;text-decoration:none;border:1.5px solid #8C8C8C;border-radius:12px;padding:9px 20px 9px 14px;transition:transform .15s,box-shadow .15s}
-  .play-badge:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(11,16,32,.28)}
+  @media (hover:hover){.play-badge:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(11,16,32,.28)}}
   .play-badge svg{width:32px;height:32px;flex:none}
   .play-badge small{display:block;font-size:10.5px;letter-spacing:.06em;line-height:1.1;font-weight:500;text-transform:uppercase}
   .play-badge strong{display:block;font:600 22px/1.1 var(--body);letter-spacing:-.01em}
@@ -115,12 +116,32 @@
   .foot a:hover{color:var(--text);text-decoration:underline}
 
   @media (max-width:900px){
-    .hero-grid{grid-template-columns:1fr;gap:48px;padding:16px 0 56px}
+    .hero-grid{grid-template-columns:1fr;gap:44px;padding:8px 0 48px;text-align:center}
     main{align-items:flex-start}
+    h1{font-size:clamp(40px,12.5vw,76px)}
+    .tagline,.lead{margin-left:auto;margin-right:auto}
+    .tagline{margin-top:20px}
+    .points{justify-content:center}
+    .nav{justify-content:center;height:68px}
+    .foot{justify-content:center;text-align:center}
+    .stage::before{width:360px;height:360px;top:20px}
   }
   @media (max-width:520px){
     body{font-size:16px}
-    .demo-tabs button{padding:9px 12px;font-size:12.5px}
+    .wrap,.hero-grid{width:calc(100% - 32px)}
+    .tagline{font-size:21px}
+    .lead{font-size:16.5px}
+    .points{font-size:14.5px;gap:8px 16px}
+    .play-badge{padding:10px 22px 10px 16px}
+    .phone{margin-bottom:6px}
+    .foot{padding:18px 0 calc(18px + env(safe-area-inset-bottom,0px))}
+  }
+  @media (max-width:340px){
+    .phone{zoom:.88}
+    h1{font-size:38px}
+  }
+  @media (max-height:520px) and (orientation:landscape){
+    .hero-grid{padding-bottom:32px}
   }
   @media (prefers-reduced-motion:reduce){
     .live::before{animation:none}
